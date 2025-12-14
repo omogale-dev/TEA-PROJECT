@@ -8,7 +8,6 @@ const nodemailer = require("nodemailer");
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-
 // --- MIDDLEWARE ---
 app.use(cors());
 app.use(express.json());
@@ -23,7 +22,7 @@ const products = [
 // --- MONGODB + MONGOOSE SETUP ---
 const MONGO_URL = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/anvis-tea";
 
-// Define schema & model ONCE (not inside routes)
+// Schema & model
 const orderSchema = new mongoose.Schema({
   name: String,
   phone: String,
@@ -40,6 +39,9 @@ const orderSchema = new mongoose.Schema({
 });
 
 const Order = mongoose.model("Order", orderSchema);
+
+// In‑memory fallback store (for Render without Mongo)
+const memoryOrders = [];
 
 // --- EMAIL (Nodemailer) ---
 const transporter = nodemailer.createTransport({
@@ -70,18 +72,25 @@ async function sendOrderEmail(order) {
   await transporter.sendMail(mailOptions);
 }
 
-// Connect to Mongo and start server
+// Connect to Mongo (if available) and start server
 async function start() {
   try {
-    await mongoose.connect(MONGO_URL);
-    console.log("Connected to MongoDB");
+    if (!process.env.MONGO_URL || process.env.MONGO_URL.includes("127.0.0.1")) {
+      console.log("No remote Mongo configured; using in‑memory orders on this server.");
+    } else {
+      await mongoose.connect(MONGO_URL);
+      console.log("Connected to MongoDB");
+    }
 
     app.listen(PORT, () => {
-      console.log(`Backend running on http://localhost:${PORT}`);
+      console.log(`Backend running on port ${PORT}`);
     });
   } catch (err) {
     console.error("MongoDB connection error:", err);
-    process.exit(1);
+    // still start the server with in‑memory store
+    app.listen(PORT, () => {
+      console.log(`Backend running with in‑memory store on port ${PORT}`);
+    });
   }
 }
 
@@ -108,7 +117,23 @@ app.post("/api/orders", async (req, res) => {
       return res.status(400).json({ message: "Invalid order data" });
     }
 
-    const savedOrder = await Order.create({ name, phone, address, cart });
+    let savedOrder;
+
+    if (mongoose.connection.readyState === 1) {
+      // Mongo connected
+      savedOrder = await Order.create({ name, phone, address, cart });
+    } else {
+      // In‑memory fallback
+      savedOrder = {
+        _id: memoryOrders.length + 1,
+        name,
+        phone,
+        address,
+        cart,
+        createdAt: new Date()
+      };
+      memoryOrders.push(savedOrder);
+    }
 
     // send email (do not block the response if email fails)
     sendOrderEmail(savedOrder).catch(err => {
@@ -125,8 +150,12 @@ app.post("/api/orders", async (req, res) => {
 // View all orders (for you/admin)
 app.get("/api/orders", async (req, res) => {
   try {
-    const allOrders = await Order.find().sort({ createdAt: -1 });
-    res.json(allOrders);
+    if (mongoose.connection.readyState === 1) {
+      const allOrders = await Order.find().sort({ createdAt: -1 });
+      return res.json(allOrders);
+    }
+    const all = [...memoryOrders].sort((a, b) => b.createdAt - a.createdAt);
+    res.json(all);
   } catch (err) {
     console.error("Error fetching orders:", err);
     res.status(500).json({ message: "Server error while fetching orders" });
