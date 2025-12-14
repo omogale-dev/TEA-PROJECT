@@ -23,6 +23,8 @@ const products = [
 // On Render, do NOT fall back to localhost; only connect if MONGO_URL is set.
 const hasRemoteMongo = !!process.env.MONGO_URL;
 const MONGO_URL = process.env.MONGO_URL;  // may be undefined on Render
+console.log("RUNNING ON RENDER, MONGO_URL =", process.env.MONGO_URL);
+console.log("hasRemoteMongo =", hasRemoteMongo);
 
 // Schema & model
 const orderSchema = new mongoose.Schema({
