@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Anvi’s Tea – Premium Organic Teas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-offwhite: #f7f4ef;
+      --bg-beige: #e8dcc7;
+      --text-dark: #2f302a;
+      --green-soft: #7c9473;
+      --green-deep: #40563a;
+      --brown-warm: #8b5a3c;
+      --border-soft: #ded3c2;
+      --radius-card: 16px;
+      --shadow-soft: 0 14px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Lato", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text-dark);
+      background: linear-gradient(to bottom, #f7f4ef, #f2ece1);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(14px);
+      background: rgba(247, 244, 239, 0.9);
+      border-bottom: 1px solid rgba(222, 211, 194, 0.7);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: "Playfair Display", serif;
+      letter-spacing: 0.08em;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      border: 1px solid var(--green-deep);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: var(--green-deep);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.8rem;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .nav-links a {
+      position: relative;
+      padding-bottom: 0.2rem;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 1px;
+      background: var(--green-deep);
+      transition: width 0.25s ease;
+    }
+
+    .nav-links a:hover::after { width: 100%; }
+
+    .btn-primary,
+    .btn-ghost {
+      border-radius: 999px;
+      padding: 0.7rem 1.6rem;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+
+    .btn-primary {
+      background: var(--green-deep);
+      color: var(--bg-offwhite);
+      box-shadow: 0 10px 30px rgba(64, 86, 58, 0.45);
+    }
+
+    .btn-primary:hover {
+      background: #324231;
+      box-shadow: 0 16px 40px rgba(64, 86, 58, 0.6);
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--green-deep);
+      border: 1px solid rgba(64, 86, 58, 0.35);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--green-deep);
+      background: rgba(64, 86, 58, 0.04);
+    }
+
+    /* HERO */
+    .hero { padding: 4rem 0 3rem; }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      font-size: 0.75rem;
+      color: var(--green-soft);
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-title {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2.4rem, 3.2vw, 3.1rem);
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .hero-highlight { color: var(--green-deep); }
+
+    .hero-text {
+      font-size: 0.98rem;
+      max-width: 30rem;
+      line-height: 1.7;
+      color: #6c665b;
+      margin-bottom: 1.6rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 1.6rem;
+    }
+
+    .hero-note {
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #9a8f7c;
+    }
+
+    .hero-media { position: relative; }
+
+    .hero-card {
+      background: var(--bg-beige);
+      border-radius: 28px;
+      padding: 1rem;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-photo {
+      border-radius: 22px;
+      height: 320px;
+      object-fit: cover;
+      width: 100%;
+      background: #000;
+    }
+
+    .hero-overlay-badge {
+      position: absolute;
+      top: 1.4rem;
+      left: 1.4rem;
+      background: rgba(247, 244, 239, 0.88);
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      border: 1px solid rgba(211, 196, 174, 0.9);
+    }
+
+    .hero-overlay-badge span {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--green-soft);
+    }
+
+    .hero-stamp {
+      position: absolute;
+      right: -1.6rem;
+      bottom: -1.6rem;
+      width: 140px;
+      height: 140px;
+      border-radius: 999px;
+      border: 1px dashed rgba(255, 255, 255, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 30% 20%, #f7f4ef, #d6c8b5);
+      font-family: "Playfair Display", serif;
+      font-size: 0.7rem;
+      text-align: center;
+      padding: 1.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #5a4b39;
+    }
+
+    section { padding: 3.5rem 0; }
+
+    .section-header { text-align: left; margin-bottom: 2.2rem; }
+
+    .section-eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      font-size: 0.76rem;
+      color: var(--green-soft);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-family: "Playfair Display", serif;
+      font-size: 1.7rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-subtitle {
+      font-size: 0.95rem;
+      color: #80786b;
+      max-width: 30rem;
+    }
+
+    /* FEATURED TEAS */
+    .section-featured { background: #f1e7d7; }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.8rem;
+    }
+
+    .product-card {
+      background: rgba(247, 244, 239, 0.96);
+      border-radius: var(--radius-card);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.05);
+      padding: 1.3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .product-photo {
+      height: 180px;
+      border-radius: 12px;
+      object-fit: cover;
+      width: 100%;
+      background: #000;
+      border: 1px solid rgba(214, 200, 181, 0.8);
+    }
+
+    .product-name {
+      font-family: "Playfair Display", serif;
+      font-size: 1.1rem;
+    }
+
+    .product-tagline {
+      font-size: 0.9rem;
+      color: #7c7366;
+    }
+
+    .product-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      margin-top: 0.4rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      border-radius: 999px;
+      padding: 0.1rem 0.7rem;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      background: rgba(124, 148, 115, 0.08);
+      color: var(--green-deep);
+    }
+
+    .product-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+      padding-top: 0.8rem;
+      border-top: 1px solid rgba(222, 211, 194, 0.7);
+      font-size: 0.8rem;
+    }
+
+    .link-more {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--brown-warm);
+    }
+
+    /* OUR STORY */
+    .story {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.1fr);
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .story-media { position: relative; }
+
+    .story-photo {
+      border-radius: 22px;
+      height: 260px;
+      object-fit: cover;
+      width: 100%;
+      background: #000;
+    }
+
+    .story-leaf {
+      position: absolute;
+      right: -0.5rem;
+      top: 40%;
+      width: 110px;
+      height: 110px;
+      border-radius: 999px;
+      background: rgba(124, 148, 115, 0.14);
+      filter: blur(2px);
+    }
+
+    .story-content p {
+      font-size: 0.96rem;
+      color: #71695c;
+      margin-bottom: 0.8rem;
+      line-height: 1.8;
+    }
+
+    .story-pillars {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.2rem;
+      margin-top: 1.2rem;
+      font-size: 0.85rem;
+    }
+
+    .story-pillars div {
+      padding-top: 0.6rem;
+      border-top: 1px solid var(--border-soft);
+    }
+
+    .story-pillars h4 {
+      font-family: "Playfair Display", serif;
+      font-size: 0.92rem;
+      margin-bottom: 0.4rem;
+    }
+
+    /* HEALTH BENEFITS */
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .benefit-card {
+      border-radius: 18px;
+      padding: 1.2rem 1.3rem;
+      background: rgba(247, 244, 239, 0.96);
+      border: 1px solid rgba(214, 200, 181, 0.8);
+    }
+
+    .benefit-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      border: 1px solid rgba(124, 148, 115, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.7rem;
+      font-size: 1rem;
+      color: var(--green-deep);
+    }
+
+    .benefit-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .benefit-text {
+      font-size: 0.86rem;
+      color: #7a7166;
+      line-height: 1.6;
+    }
+
+    /* TESTIMONIALS */
+    .section-testimonials { background: #f5efe4; }
+
+    .testimonials-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.6rem;
+    }
+
+    .testimonial-card {
+      background: rgba(247, 244, 239, 0.98);
+      border-radius: 18px;
+      padding: 1.4rem 1.5rem;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .testimonial-quote {
+      font-size: 0.9rem;
+      color: #6e6659;
+      line-height: 1.7;
+    }
+
+    .testimonial-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      font-size: 0.8rem;
+    }
+
+    .avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      border: 1px solid rgba(214, 200, 181, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #5a4b39;
+      background: linear-gradient(135deg, #efece3, #d6c8b5);
+    }
+
+    .stars {
+      color: #c79246;
+      font-size: 0.76rem;
+      letter-spacing: 0.1em;
+    }
+
+    /* FOOTER */
+    footer {
+      background: linear-gradient(135deg, #40563a, #2f302a);
+      color: #f7f4ef;
+      padding: 3rem 0 2rem;
+      margin-top: 2rem;
+    }
+
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr 1.1fr;
+      gap: 2.5rem;
+      font-size: 0.86rem;
+    }
+
+    .footer-brand {
+      font-family: "Playfair Display", serif;
+      font-size: 1.4rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .footer-sub {
+      color: #d9d1c5;
+      max-width: 15rem;
+      line-height: 1.6;
+      margin-bottom: 0.6rem;
+    }
+
+    .footer-tag {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #c5b9a6;
+    }
+
+    .footer-links {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.5rem;
+    }
+
+    .footer-links a {
+      color: #e3d9c8;
+      font-size: 0.84rem;
+    }
+
+    .footer-links a:hover { color: #ffffff; }
+
+    .newsletter-label {
+      font-size: 0.85rem;
+      margin-bottom: 0.4rem;
+      color: #e5dbcd;
+    }
+
+    .newsletter-note {
+      font-size: 0.78rem;
+      margin-bottom: 0.9rem;
+      color: #cdbfa9;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .newsletter-input {
+      flex: 1;
+      border-radius: 999px;
+      padding: 0.65rem 1rem;
+      border: 1px solid rgba(247, 244, 239, 0.4);
+      background: rgba(47, 48, 42, 0.3);
+      color: #f7f4ef;
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    .newsletter-input::placeholder { color: #bfb5a6; }
+
+    .footer-bottom {
+      margin-top: 2.2rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid rgba(203, 191, 171, 0.35);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      color: #c7baa7;
+    }
+
+    .footer-social { display: flex; gap: 0.6rem; }
+
+    .social-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      border: 1px solid rgba(235, 225, 210, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .social-icon:hover {
+      background: #f7f4ef;
+      color: #2f302a;
+    }
+
+    @media (max-width: 840px) {
+      .nav-links { display: none; }
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-media { order: -1; }
+      .story { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .footer-bottom {
+        flex-direction: column;
+        gap: 0.6rem;
+        align-items: flex-start;
+      }
+      /* Extra mobile tweaks for small screens */
+@media (max-width: 600px) {
+  body {
+    padding: 0;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+
+  .hero {
+    padding: 2.5rem 0 2rem;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-text {
+    font-size: 0.9rem;
+  }
+
+  .btn-primary,
+  .btn-ghost {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .product-card {
+    padding: 1rem;
+  }
+
+  .product-photo {
+    height: 160px;
+  }
+
+  .section-title {
+    font-size: 1.4rem;
+  }
+
+  .section-subtitle {
+    font-size: 0.9rem;
+  }
+
+  #shop .product-actions {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0.8rem;
+  }
+
+  #shop input[type="number"] {
+    width: 56px;
+  }
+}
+
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="brand-mark">AT</div>
+        <span>Anvi’s Tea</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#hero">Home</a>
+        <a href="#teas">Our Teas</a>
+        <a href="#story">Our Story</a>
+        <a href="#benefits">Health</a>
+        <a href="#testimonials">Voices</a>
+        <a href="#shop">Shop</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="btn-primary">Shop Teas</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section id="hero" class="hero">
+      <div class="container hero-inner">
+        <div>
+          <div class="eyebrow">Premium · Organic · Handpicked</div>
+          <h1 class="hero-title">
+            Handpicked organic teas,<br />
+            crafted for <span class="hero-highlight">calm rituals</span>.
+          </h1>
+          <p class="hero-text">
+            Anvi’s Tea sources small‑batch, pesticide‑free leaves from sustainable gardens,
+            blending them into serene cups that slow the pace of your day.
+          </p>
+          <div class="hero-cta">
+            <button class="btn-primary">Shop organic teas</button>
+            <button class="btn-ghost">Discover our story</button>
+          </div>
+          <p class="hero-note">Ethically sourced · Slow dried · Plastic‑free packaging</p>
+        </div>
+
+        <div class="hero-media">
+          <div class="hero-card">
+            <div class="hero-overlay-badge">
+              <span></span>
+              Single‑estate organic blends
+            </div>
+            <img
+              src="tea-farm-morning.jpg"
+              alt="Luxury flat lay of premium organic tea leaves on a wooden table"
+              class="hero-photo"
+            />
+            <div class="hero-stamp">
+              Brewed with<br />
+              patience &amp; purpose
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED TEAS -->
+    <section id="teas" class="section-featured">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">Featured organic teas</div>
+          <h2 class="section-title">A quiet collection of calm.</h2>
+          <p class="section-subtitle">
+            Explore our most loved, small‑batch teas, crafted from handpicked
+            leaves and gentle, nature‑first processing.
+          </p>
+        </div>
+
+        <div class="product-grid">
+          <article class="product-card">
+            <img
+              src="green-leaves.jpg"
+              alt="Ultra close-up macro shot of fresh handpicked green tea leaves"
+              class="product-photo"
+            />
+            <h3 class="product-name">Himalayan Dawn Green</h3>
+            <p class="product-tagline">Bright, grassy notes with a soft floral finish.</p>
+            <div class="product-meta">
+              <span>₹650 · 80g</span>
+              <span class="pill">Single estate</span>
+            </div>
+            <div class="product-actions">
+              <a href="#shop" class="link-more">Shop now →</a>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <img
+              src="anvi--packaging.jpg"
+              alt="Minimal premium organic tea packaging mockup for Anvi’s Tea in kraft paper"
+              class="product-photo"
+            />
+            <h3 class="product-name">Moonlit Chamomile</h3>
+            <p class="product-tagline">Caffeine‑free blossoms for deep, easy rest.</p>
+            <div class="product-meta">
+              <span>₹580 · 50g</span>
+              <span class="pill">Caffeine‑free</span>
+            </div>
+            <div class="product-actions">
+              <a href="#shop" class="link-more">Shop now →</a>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <img
+              src="herbal-lifestyle.jpg"
+              alt="Serene lifestyle photo of herbal tea in a handcrafted ceramic cup"
+              class="product-photo"
+            />
+            <h3 class="product-name">Smoked Oak Assam</h3>
+            <p class="product-tagline">Rich, malty liquor with subtle woody depth.</p>
+            <div class="product-meta">
+              <span>₹720 · 100g</span>
+              <span class="pill">Small batch</span>
+            </div>
+            <div class="product-actions">
+              <a href="#shop" class="link-more">Shop now →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- OUR STORY -->
+    <section id="story">
+      <div class="container story">
+        <div class="story-media">
+          <img
+            src="tea-farm-morning.jpg"
+            alt="Serene early-morning organic tea farm with soft golden sunlight and lush green tea fields"
+            class="story-photo"
+          />
+          <div class="story-leaf"></div>
+        </div>
+        <div class="story-content">
+          <div class="section-eyebrow">Our story</div>
+          <h2 class="section-title">Rooted in hills, crafted by hand.</h2>
+          <p>
+            Anvi’s Tea began as a quiet search for leaves that tasted like
+            early mist over the mountains — pure, unhurried, and alive.
+          </p>
+          <p>
+            Today, every batch is handpicked at peak freshness, shade‑dried
+            in small quantities, and blended in micro‑lots to preserve the
+            character of each leaf.
+          </p>
+          <p>
+            We partner with growers who nurture their soil, use traditional
+            harvesting techniques, and are steadily transitioning to fully
+            regenerative farming.
+          </p>
+
+          <div class="story-pillars">
+            <div>
+              <h4>Purity</h4>
+              <p>Pesticide‑free leaves, slow processed to protect natural oils and aroma.</p>
+            </div>
+            <div>
+              <h4>Craft</h4>
+              <p>Small batches, hand‑sorted leaves, and thoughtful, minimal blending.</p>
+            </div>
+            <div>
+              <h4>Sustainability</h4>
+              <p>Soil‑first farming and plastic‑free packaging from pouch to post.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HEALTH BENEFITS -->
+    <section id="benefits">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">Health benefits</div>
+          <h2 class="section-title">Wellness in every cup.</h2>
+          <p class="section-subtitle">
+            Gentle, daily rituals that support rest, focus, and quiet immunity — brewed from leaves, not lab formulas.
+          </p>
+        </div>
+
+        <div class="benefit-grid">
+          <div class="benefit-card">
+            <div class="benefit-icon">☕</div>
+            <div class="benefit-title">Calm & relaxation</div>
+            <p class="benefit-text">
+              Soothing blends with herbs like chamomile and tulsi to soften stress at the end of the day.
+            </p>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-icon">✶</div>
+            <div class="benefit-title">Antioxidant‑rich</div>
+            <p class="benefit-text">
+              Whole leaves, minimally processed, to retain the plant’s natural antioxidant profile.
+            </p>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-icon">◎</div>
+            <div class="benefit-title">Gut‑kind rituals</div>
+            <p class="benefit-text">
+              Gentle infusions that are light on digestion and easy to weave into daily routines.
+            </p>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-icon">☼</div>
+            <div class="benefit-title">Natural immunity</div>
+            <p class="benefit-text">
+              Thoughtful pairings of traditional ingredients to quietly support everyday resilience.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials" class="section-testimonials">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">Testimonials</div>
+          <h2 class="section-title">Loved by slow tea seekers.</h2>
+          <p class="section-subtitle">
+            From first sip to last steep, Anvi’s Tea is a gentle pause in our
+            customers’ busiest days.
+          </p>
+        </div>
+
+        <div class="testimonials-row">
+          <article class="testimonial-card">
+            <p class="testimonial-quote">
+              “The chamomile blend has become my nightly ritual. It feels
+              clean, floral, and never too sweet — just quietly comforting.”
+            </p>
+            <div class="testimonial-meta">
+              <div style="display:flex;align-items:center;gap:0.7rem;">
+                <div class="avatar">AK</div>
+                <div>
+                  <div>Ananya, Bengaluru</div>
+                  <div class="stars">★★★★★</div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="testimonial-card">
+            <p class="testimonial-quote">
+              “You can literally see the quality in the leaves. The green tea
+              brews bright and smooth, with zero bitterness when brewed right.”
+            </p>
+            <div class="testimonial-meta">
+              <div style="display:flex;align-items:center;gap:0.7rem;">
+                <div class="avatar">RS</div>
+                <div>
+                  <div>Rohit, Mumbai</div>
+                  <div class="stars">★★★★★</div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="testimonial-card">
+            <p class="testimonial-quote">
+              “The packaging, the aroma, the story — everything feels
+              thoughtfully handcrafted. It’s my go‑to gift for slow‑living friends.”
+            </p>
+            <div class="testimonial-meta">
+              <div style="display:flex;align-items:center;gap:0.7rem;">
+                <div class="avatar">SM</div>
+                <div>
+                  <div>Saumya, Delhi</div>
+                  <div class="stars">★★★★★</div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SHOP -->
+    <section id="shop" style="display:none; padding-top:2rem;">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">Shop</div>
+          <h2 class="section-title">Order your favorite teas.</h2>
+          <p class="section-subtitle">
+            Choose your teas, review your cart, and place an order request. This will send your order to the backend.
+          </p>
+        </div>
+
+        <div class="product-grid" id="shop-products">
+          <article class="product-card" data-id="1" data-name="Himalayan Dawn Green" data-price="650">
+            <img
+              src="green-leaves.jpg"
+              alt="Ultra close-up macro shot of fresh handpicked green tea leaves"
+              class="product-photo"
+            />
+            <h3 class="product-name">Himalayan Dawn Green</h3>
+            <p class="product-tagline">Bright, grassy notes with a soft floral finish.</p>
+            <div class="product-meta">
+              <span>₹650 · 80g</span>
+              <span class="pill">Single estate</span>
+            </div>
+            <div class="product-actions">
+              <div>
+                <label style="font-size:0.8rem;">Qty:</label>
+                <input type="number" min="1" value="1"
+                       style="width:50px;font-size:0.8rem;padding:0.1rem 0.3rem;" />
+              </div>
+              <button class="btn-ghost add-to-cart" style="padding:0.4rem 0.9rem;">Add to cart</button>
+            </div>
+          </article>
+
+          <article class="product-card" data-id="2" data-name="Moonlit Chamomile" data-price="580">
+            <img
+              src="anvi--packaging.jpg"
+              alt="Minimal premium organic tea packaging mockup for Anvi’s Tea in kraft paper"
+              class="product-photo"
+            />
+            <h3 class="product-name">Moonlit Chamomile</h3>
+            <p class="product-tagline">Caffeine‑free blossoms for deep, easy rest.</p>
+            <div class="product-meta">
+              <span>₹580 · 50g</span>
+              <span class="pill">Caffeine‑free</span>
+            </div>
+            <div class="product-actions">
+              <div>
+                <label style="font-size:0.8rem;">Qty:</label>
+                <input type="number" min="1" value="1"
+                       style="width:50px;font-size:0.8rem;padding:0.1rem 0.3rem;" />
+              </div>
+              <button class="btn-ghost add-to-cart" style="padding:0.4rem 0.9rem;">Add to cart</button>
+            </div>
+          </article>
+
+          <article class="product-card" data-id="3" data-name="Smoked Oak Assam" data-price="720">
+            <img
+              src="herbal-lifestyle.jpg"
+              alt="Serene lifestyle photo of herbal tea in a handcrafted ceramic cup"
+              class="product-photo"
+            />
+            <h3 class="product-name">Smoked Oak Assam</h3>
+            <p class="product-tagline">Rich, malty liquor with subtle woody depth.</p>
+            <div class="product-meta">
+              <span>₹720 · 100g</span>
+              <span class="pill">Small batch</span>
+            </div>
+            <div class="product-actions">
+              <div>
+                <label style="font-size:0.8rem;">Qty:</label>
+                <input type="number" min="1" value="1"
+                       style="width:50px;font-size:0.8rem;padding:0.1rem 0.3rem;" />
+              </div>
+              <button class="btn-ghost add-to-cart" style="padding:0.4rem 0.9rem;">Add to cart</button>
+            </div>
+          </article>
+        </div>
+
+        <!-- CART + ORDER FORM -->
+        <div style="margin-top:2.5rem; border-top:1px solid rgba(222,211,194,0.8); padding-top:1.5rem;">
+          <h3 class="section-title" style="font-size:1.3rem;">Your cart</h3>
+          <div id="cart-empty" style="font-size:0.9rem;color:#7a7166;margin-top:0.5rem;">
+            Your cart is empty. Add some teas above.
+          </div>
+          <ul id="cart-items" style="list-style:none; margin-top:0.8rem; font-size:0.9rem;"></ul>
+          <div id="cart-total" style="margin-top:0.6rem;font-weight:600;"></div>
+
+          <form id="order-form" style="margin-top:1.5rem; max-width:420px;">
+            <h4 style="font-size:1rem;margin-bottom:0.6rem;">Delivery details</h4>
+            <div style="display:flex;flex-direction:column;gap:0.6rem;font-size:0.85rem;">
+              <input type="text" id="customer-name" placeholder="Full name" required
+                     style="padding:0.6rem 0.8rem;border-radius:12px;border:1px solid #ded3c2;" />
+              <input type="text" id="customer-phone" placeholder="Phone number" required
+                     style="padding:0.6rem 0.8rem;border-radius:12px;border:1px solid #ded3c2;" />
+              <textarea id="customer-address" placeholder="Delivery address" required rows="3"
+                        style="padding:0.6rem 0.8rem;border-radius:12px;border:1px solid #ded3c2;font-family:inherit;font-size:0.85rem;"></textarea>
+            </div>
+            <button type="submit" class="btn-primary" style="margin-top:1rem;">Place order</button>
+            <div id="order-message" style="margin-top:0.7rem;font-size:0.85rem;color:#40563a;"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <div class="container footer-inner">
+      <div>
+        <div class="footer-brand">Anvi’s Tea</div>
+        <p class="footer-sub">
+          Premium, organic teas that invite you to slow down, steep deeper, and sip with intention.
+        </p>
+        <div class="footer-tag">Certified organic · Handpicked · Small batch</div>
+      </div>
+
+      <div>
+        <h4 style="margin-bottom:0.8rem;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.16em;">Explore</h4>
+        <div class="footer-links">
+          <a href="#hero">Home</a>
+          <a href="#teas">Our Teas</a>
+          <a href="#story">Our Story</a>
+          <a href="#benefits">Health Benefits</a>
+          <a href="#testimonials">Testimonials</a>
+          <a href="#shop">Shop</a>
+          <a href="#">Journal</a>
+          <a href="#">FAQs</a>
+          <a href="#">Shipping &amp; Returns</a>
+        </div>
+      </div>
+
+      <div>
+        <h4 style="margin-bottom:0.8rem;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.16em;">Stay steeped</h4>
+        <p class="newsletter-label">Join the Anvi’s Tea circle.</p>
+        <p class="newsletter-note">
+          Occasional notes on new harvests, brewing rituals, and quiet offers — no clutter.
+        </p>
+        <form class="newsletter-form">
+          <input class="newsletter-input" type="email" placeholder="Your email address" />
+          <button type="submit" class="btn-primary" style="padding:0.6rem 1.1rem;font-size:0.78rem;">Join</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <div>© <span id="year"></span> Anvi’s Tea. All rights reserved.</div>
+      <div class="footer-social">
+        <div class="social-icon">IG</div>
+        <div class="social-icon">PI</div>
+        <div class="social-icon">YT</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const API_BASE = "http://localhost:4000";
+
+    // Year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Show shop
+    function openShopSection() {
+      const shopSection = document.getElementById("shop");
+      if (!shopSection) return;
+      shopSection.style.display = "block";
+      shopSection.scrollIntoView({ behavior: "smooth" });
+    }
+
+    const headerShopBtn = document.querySelector("header .btn-primary");
+    if (headerShopBtn) headerShopBtn.addEventListener("click", openShopSection);
+
+    const heroButtons = Array.from(document.querySelectorAll(".hero-cta button"));
+    heroButtons.forEach(btn => {
+      if (btn.textContent.toLowerCase().includes("shop")) {
+        btn.addEventListener("click", openShopSection);
+      }
+    });
+
+    // Shared cart
+    const cart = [];
+    const cartList = document.getElementById("cart-items");
+    const cartEmpty = document.getElementById("cart-empty");
+    const cartTotal = document.getElementById("cart-total");
+
+    function renderCart() {
+      if (!cartList) return;
+      cartList.innerHTML = "";
+      if (cart.length === 0) {
+        if (cartEmpty) cartEmpty.style.display = "block";
+        if (cartTotal) cartTotal.textContent = "";
+        return;
+      }
+      if (cartEmpty) cartEmpty.style.display = "none";
+
+      let total = 0;
+      cart.forEach(item => {
+        total += item.price * item.qty;
+        const li = document.createElement("li");
+        li.textContent = `${item.name} × ${item.qty} — ₹${item.price * item.qty}`;
+        cartList.appendChild(li);
+      });
+      if (cartTotal) cartTotal.textContent = "Total: ₹" + total;
+    }
+
+    const addButtons = document.querySelectorAll("#shop .add-to-cart");
+    addButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const card = btn.closest(".product-card");
+        if (!card) return;
+        const id = card.getAttribute("data-id");
+        const name = card.getAttribute("data-name");
+        const price = Number(card.getAttribute("data-price"));
+        const qtyInput = card.querySelector("input[type='number']");
+        const qty = qtyInput ? Number(qtyInput.value) || 1 : 1;
+
+        const existing = cart.find(item => item.id === id);
+        if (existing) existing.qty += qty;
+        else cart.push({ id, name, price, qty });
+
+        renderCart();
+      });
+    });
+
+    const orderForm = document.getElementById("order-form");
+    const orderMsg = document.getElementById("order-message");
+
+    if (orderForm) {
+      orderForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        if (cart.length === 0) {
+          alert("Your cart is empty. Please add some teas first.");
+          return;
+        }
+
+        const name = document.getElementById("customer-name").value.trim();
+        const phone = document.getElementById("customer-phone").value.trim();
+        const address = document.getElementById("customer-address").value.trim();
+
+        if (!name || !phone || !address) {
+          alert("Please fill in all delivery details.");
+          return;
+        }
+
+        try {
+          const res = await fetch(API_BASE + "/api/orders", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, phone, address, cart })
+          });
+          const data = await res.json();
+          if (!res.ok) {
+            alert(data.message || "Order failed");
+            return;
+          }
+
+          if (orderMsg) {
+            orderMsg.textContent =
+              "Thank you, " + name + ". Your order has been received. Order ID: " + data.orderId;
+          }
+
+          cart.length = 0;
+          renderCart();
+          orderForm.reset();
+        } catch (err) {
+          console.error(err);
+          alert("Could not place order. Check if backend is running on " + API_BASE);
+        }
+      });
+    }
+  </script>
+</body>
+</html>
